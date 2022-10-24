@@ -1,26 +1,27 @@
-<<<<<<< HEAD
-let books = [
-    {
-        title: 'Harry Potter',
-        author: 'Jk Rolling'
-    }
-]
+function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
 
-const inputTitle = document.querySelector('#title')
-const inputAuthor = document.querySelector('#author')
+// Creating a new istance of booksLocalStorageObject with empty values
+let booksLocalStorageObj = new Book('', '');
+
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const addbtn = document.querySelector('#add')
 
 function storageAvailable(type) {
-    let storage;
-    try {
-        storage = window[type];
-        const x = '__storage_test__';
-        storage.setItem(x, x);
-        storage.removeItem(x);
-        return true;
-    } catch (e) {
-        return e instanceof DOMException && (
-            // everything except Firefox
-            e.code === 22
+  let storage;
+  try {
+    storage = window[type];
+    const x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return e instanceof DOMException && (
+    // everything except Firefox
+      e.code === 22
             // Firefox
             || e.code === 1014
             // test name field too, because code might not be present
@@ -30,90 +31,69 @@ function storageAvailable(type) {
             || e.name === 'NS_ERROR_DOM_QUOTA_REACHED')
             // acknowledge QuotaExceededError only if there's something already stored
             && (storage && storage.length !== 0);
-    }
-}
-
-function booksLocalStorageObject(title, author) {
-    this.title = title;
-    this.author = author;
+  }
 }
 
 function populateLocalStorage() {
-    let title = '';
-    let author = '';
+  let titleStr = '';
+  let authorStr = '';
 
-    //Conditional statement to check if the <input> with #title id has text/ value
-    if (inputTitle.value !== null) {
-        title = inputTitle.value;
-    }
+  // Conditional statement to check if the <input> with #title id has text/ value
+  if (title.value !== null) {
+    titleStr = title.value;
+  }
 
-    //Conditional statement to check if the <input> with #author id has text/ value
-    if (inputAuthor.value !== null) {
-        author = inputAuthor.value;
-    }
+  // Conditional statement to check if the <input> with #author id has text/ value
+  if (author.value !== null) {
+    authorStr = author.value;
+  }
 
-    //Creating a new object that will hold the information we get from the input values
-    let booksLocalStorageObj = new booksLocalStorageObject(title, author);
+  // Creating a new object that will hold the information we get from the input values
+  booksLocalStorageObj = new Book(titleStr, authorStr);
 
-    //Conditional statement to check id localStorage is available on the browser
-    if (storageAvailable('localStorage')) {
-
-        //If the condition is true, we will set the object created above into the local storage
-        localStorage.setItem('formData', JSON.stringify(booksLocalStorageObj));
-    }
+  // Conditional statement to check id localStorage is available on the browser
+  if (storageAvailable('localStorage')) {
+    // If the condition is true, we will set the object created above into the local storage
+    localStorage.setItem('book', JSON.stringify(booksLocalStorageObj));
+  }
 }
 
 function loadLocalstorageData() {
-    //Creating a new istance of booksLocalStorageObject with empty values
-    let booksLocalStorageObj = new booksLocalStorageObject('','');
+  // Conditional statement to check id localStorage is available on the browser
+  if (storageAvailable('localStorage')) {
+    // If the condition is true, get the localStorage data and assing to the booksLocalStorageObj
+    booksLocalStorageObj = JSON.parse(localStorage.getItem('book'));
+  }
 
-    //Conditional statement to check id localStorage is available on the browser
-    if(storageAvailable('localStorage')){
-
-        //If the condition is true, get the localStorage data and assing to the booksLocalStorageObj
-        booksLocalStorageObj = JSON.parse(localStorage.getItem('formData'));
-    }
-
-    //Conditional to check if booksLocalStorageObj has data
-    if(booksLocalStorageObj !== null){
-
-        //If the condition is true, load the data the the input elements
-        inputTitle.value = booksLocalStorageObj.title;
-        inputAuthor.value = booksLocalStorageObj.author;
-    }
+  // Conditional to check if booksLocalStorageObj has data
+  if (booksLocalStorageObj !== null) {
+    // If the condition is true, load the data the the input elements
+    title.value = booksLocalStorageObj.title;
+    author.value = booksLocalStorageObj.author;
+  }
 }
-
-window.addEventListener('load', loadLocalstorageData);
-inputTitle.addEventListener('input', populateLocalStorage);
-inputAuthor.addEventListener('input', populateLocalStorage);
-=======
-const title = document.getElementById('title');
-const aurthor = document.getElementById('aurthor');
-const addbtn = document.getElementById('add');
 
 const book = [{
   title: 'The Hobbit',
-  aurthor: 'J.R.R. Tolkien',
+  author: 'J.R.R. Tolkien',
 },
 
 {
   title: 'The Good Parts',
-  aurthor: 'Douglas Crockford',
+  author: 'Douglas Crockford',
 },
 ];
 
-function Book(title, aurthor) {
-  this.title = title;
-  this.aurthor = aurthor;
-}
-
-function addBook(title, aurthor) {
-  const newBook = new Book(title, aurthor);
+function addBook(title, author) {
+  const newBook = new Book(title, author);
   book.push(newBook);
 }
 
-function removeBook(title, aurthor) {
-  const newBook = new Book(title, aurthor);
-  return book.title !== newBook.title && book.aurthor !== newBook.aurthor;
+function removeBook(title, author) {
+  const newBook = new Book(title, author);
+  return book.title !== newBook.title && book.author !== newBook.author;
 }
->>>>>>> 9e01004c393dc7679fd84257ff714e4e955cd164
+
+window.addEventListener('load', loadLocalstorageData);
+title.addEventListener('input', populateLocalStorage);
+author.addEventListener('input', populateLocalStorage);
