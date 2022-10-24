@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let books = [
     {
         title: 'Harry Potter',
@@ -85,3 +86,34 @@ function loadLocalstorageData() {
 window.addEventListener('load', loadLocalstorageData);
 inputTitle.addEventListener('input', populateLocalStorage);
 inputAuthor.addEventListener('input', populateLocalStorage);
+=======
+const title = document.getElementById('title');
+const aurthor = document.getElementById('aurthor');
+const addbtn = document.getElementById('add');
+
+const book = [{
+  title: 'The Hobbit',
+  aurthor: 'J.R.R. Tolkien',
+},
+
+{
+  title: 'The Good Parts',
+  aurthor: 'Douglas Crockford',
+},
+];
+
+function Book(title, aurthor) {
+  this.title = title;
+  this.aurthor = aurthor;
+}
+
+function addBook(title, aurthor) {
+  const newBook = new Book(title, aurthor);
+  book.push(newBook);
+}
+
+function removeBook(title, aurthor) {
+  const newBook = new Book(title, aurthor);
+  return book.title !== newBook.title && book.aurthor !== newBook.aurthor;
+}
+>>>>>>> 9e01004c393dc7679fd84257ff714e4e955cd164
