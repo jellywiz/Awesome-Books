@@ -1,9 +1,7 @@
-li {
-  list-style-type: none;
-  padding-right: 100px;
-  width: 100%;
+.books {
+  background-color: orange;
 }
 
-form {
-  padding-left: 30px;
+.books-items {
+  background-color: yellow;
 }
