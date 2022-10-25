@@ -3,9 +3,11 @@ const inputTitle = document.querySelector('#title');
 const inputAuthor = document.querySelector('#author');
 const form = document.querySelector('form');
 const list = document.querySelector('ul');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
 
 // creating the array of the objects
-const book = [];
+const bookList = [];
 
 // This function acts like a constructor for the book object
 function Book(title, author) {
@@ -15,26 +17,28 @@ function Book(title, author) {
 
 // This function will add the book to the local storage
 function addToLocalStorage() {
-  localStorage.setItem('books', JSON.stringify(book));
+  localStorage.setItem('books', JSON.stringify(bookList));
 }
 
 // This function will display all the books in the list and also add the books to the local storage
-function displayBook() {
+function showBook() {
   // Creating the a new list element
   const li = document.createElement('li');
 
   // Creating spans to hold the title and the author and creating a new button to remove the book
   li.innerHTML = `
-  <span>${inputTitle.value}</span><br>
-  <span>${inputAuthor.value}</span><br>
-  <button id="remove-btn" class="remove">Remove</button> <hr>`;
+  <span>${title.value}</span><br>
+  <span>${author.value}</span>
+  <button class="remove">Remove</button>
+  <hr>
+  `;
 
   // Creating a new object that will hold the information we get from the input values
-  const newBook = new Book(inputTitle.value, inputAuthor.value);
+  const newBook = new Book(title.value, author.value);
   // Pushing the new book to the book array
-  book.push(newBook);
+  bookList.push(newBook);
   // Adding the new book to the local storage
-  addToLocalStorage(book);
+  addToLocalStorage(bookList);
   // Appending the new list element to the list
   list.appendChild(li);
 
@@ -46,9 +50,9 @@ function displayBook() {
     // Creating a key variable that will hold the index of the book in the book array
     const key = element;
     localStorage.removeItem(key);
-    for (let i = 0; i < book.length; i += 1) {
-      if (element === book[i].title) {
-        book.splice(i, 1);
+    for (let i = 0; i < bookList.length; i += 1) {
+      if (element === bookList[i].title) {
+        bookList.splice(i, 1);
       }
     }
   }
@@ -59,7 +63,7 @@ function displayBook() {
       removeBook(e.target.parentElement.firstElementChild.innerText);
       e.target.parentElement.remove();
       localStorage.clear();
-      addToLocalStorage(book);
+      addToLocalStorage(bookList);
     });
   });
 }
@@ -67,11 +71,13 @@ function displayBook() {
 // Adding an event listener to the form to submit the data and display the book in the list
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+
   localStorage.clear();
-  addToLocalStorage(book);
-  displayBook();
-  inputTitle.value = '';
-  inputAuthor.value = '';
+  addToLocalStorage(bookList);
+  showBook();
+
+  title.value = '';
+  author.value = '';
 });
 
 // creating a function to load the books from the local storage to the list when the page loads
@@ -81,16 +87,15 @@ function getBook() {
 
   // Looping through the data from the local storage and displaying it in the list
   if (localStorage) {
-    // eslint-disable-next-line no-restricted-syntax
-    dataFromLocalStorage.forEach((books) => {
-      book.push(books);
+    dataFromLocalStorage.forEach((book) => {
+      bookList.push(book);
 
       const li = document.createElement('li');
 
       li.innerHTML = `
-      <span>${books.title}</span><br>
-      <span>${books.author}</span><br>
-      <button id="remove-btn class="remove">Remove</button>
+      <span>${book.title}</span><br>
+      <span>${book.author}</span>
+      <button class="remove">Remove</button>
       <hr>
       `;
       list.appendChild(li);
@@ -108,9 +113,9 @@ removeBtn.forEach((btn) => {
     function removeBook(element) {
       const key = element;
       localStorage.removeItem(key);
-      for (let i = 0; i < book.length; i += 1) {
-        if (element === book[i].title) {
-          book.splice(i, 1);
+      for (let i = 0; i < bookList.length; i += 1) {
+        if (element === bookList[i].title) {
+          bookList.splice(i, 1);
         }
       }
     }
@@ -122,7 +127,7 @@ removeBtn.forEach((btn) => {
     // Clearing the local storage
     localStorage.clear();
     // Adding the new book to the local storage
-    addToLocalStorage(book);
+    addToLocalStorage(bookList);
   });
 });
 
