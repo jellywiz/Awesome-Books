@@ -42,8 +42,8 @@ body {
   font-size: 1em;
 }
 
-.books-items-odd{
-  background-color: rgba(0, 0, 0, .2);
+.books-items-odd {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .remove-button {
@@ -74,6 +74,7 @@ body {
   margin: 6px;
   border: 2px solid black;
 }
+
 .add-btn-div {
   width: 210px;
   display: flex;
