@@ -1,135 +1,17 @@
+/* eslint-disable max-classes-per-file */
 // Getting the elements from the html page
-const inputTitle = document.querySelector('#title');
-const inputAuthor = document.querySelector('#author');
-const form = document.querySelector('form');
-const list = document.querySelector('ul');
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
+const inputTitle = document.getElementById('title');
+const inputAuthor = document.getElementById('author');
+const bookSection = document.querySelector('.books-container');
+const btn = document.querySelector('#add-btn');
 
-// creating the array of the objects
-const bookList = [];
-
-// This function acts like a constructor for the book object
-function Book(title, author) {
-  this.title = title;
-  this.author = author;
-}
-
-// This function will add the book to the local storage
-function addToLocalStorage() {
-  localStorage.setItem('books', JSON.stringify(bookList));
-}
-
-// This function will display all the books in the list and also add the books to the local storage
-function showBook() {
-  // Creating the a new list element
-  const li = document.createElement('li');
-
-  // Creating spans to hold the title and the author and creating a new button to remove the book
-  li.innerHTML = `
-  <span>${title.value}</span><br>
-  <span>${author.value}</span>
-  <button class="remove">Remove</button>
-  <hr>
-  `;
-
-  // Creating a new object that will hold the information we get from the input values
-  const newBook = new Book(title.value, author.value);
-  // Pushing the new book to the book array
-  bookList.push(newBook);
-  // Adding the new book to the local storage
-  addToLocalStorage(bookList);
-  // Appending the new list element to the list
-  list.appendChild(li);
-
-  // Creating a new varibale that will hold the remove button class
-  const removeBtn = document.querySelectorAll('.remove');
-
-  // Function to remove the book from the list
-  function removeBook(element) {
-    // Creating a key variable that will hold the index of the book in the book array
-    const key = element;
-    localStorage.removeItem(key);
-    for (let i = 0; i < bookList.length; i += 1) {
-      if (element === bookList[i].title) {
-        bookList.splice(i, 1);
-      }
-    }
-  }
-
-  // Looping through the remove button and adding an event listener to each one
-  removeBtn.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      removeBook(e.target.parentElement.firstElementChild.innerText);
-      e.target.parentElement.remove();
-      localStorage.clear();
-      addToLocalStorage(bookList);
-    });
-  });
-}
-
-// Adding an event listener to the form to submit the data and display the book in the list
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  localStorage.clear();
-  addToLocalStorage(bookList);
-  showBook();
-
-  title.value = '';
-  author.value = '';
-});
-
-// creating a function to load the books from the local storage to the list when the page loads
-function getBook() {
-  const dataFromLocalStorage = JSON.parse(localStorage.getItem('books'));
-  const list = document.querySelector('ul');
-
-  // Looping through the data from the local storage and displaying it in the list
-  if (localStorage) {
-    dataFromLocalStorage.forEach((book) => {
-      bookList.push(book);
-
-      const li = document.createElement('li');
-
-      li.innerHTML = `
-      <span>${book.title}</span><br>
-      <span>${book.author}</span>
-      <button class="remove">Remove</button>
-      <hr>
-      `;
-      list.appendChild(li);
-    });
+// Addinding a book class with a constructor that will hold the title and the author
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
   }
 }
-
-getBook();
-
-const removeBtn = document.querySelectorAll('.remove');
-
-// Adding event Listener to the remove button to remove the book from the list and the local storage
-removeBtn.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    function removeBook(element) {
-      const key = element;
-      localStorage.removeItem(key);
-      for (let i = 0; i < bookList.length; i += 1) {
-        if (element === bookList[i].title) {
-          bookList.splice(i, 1);
-        }
-      }
-    }
-
-    // Calling the removeBook function to remove the book from the list and the local storage
-    removeBook(e.target.parentElement.firstElementChild.innerText);
-    // Removing the book from the list
-    e.target.parentElement.remove();
-    // Clearing the local storage
-    localStorage.clear();
-    // Adding the new book to the local storage
-    addToLocalStorage(bookList);
-  });
-});
 
 // Adding a function to check if the local storage is available on the browser
 function storageAvailable(type) {
