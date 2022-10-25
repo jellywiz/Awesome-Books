@@ -2,7 +2,7 @@
 // Getting the elements from the html page
 const inputTitle = document.getElementById('title');
 const inputAuthor = document.getElementById('author');
-const bookSection = document.querySelector('.books-container');
+const bookContainer = document.querySelector('.books-container');
 const btn = document.querySelector('#add-btn');
 
 // Addinding a book class with a constructor that will hold the title and the author
@@ -25,7 +25,7 @@ class SettingBooks {
     this.books.push(bookItem);
     this.show(bookItem);
     this.remove();
-    this.saveToStorage();
+    this.addToLocalStorage();
     inputAuthor.value = '';
     inputTitle.value = '';
   }
@@ -34,9 +34,14 @@ class SettingBooks {
   remove() {
     const removeBtns = document.querySelectorAll('.remove-button');
     removeBtns[removeBtns.length - 1].addEventListener('click', (e) => {
-      this.removeFromColl(e.target);
-      bookSection.removeChild(e.target.parentNode);
+      this.removeFromCollection(e.target);
+      bookContainer.removeChild(e.target.parentNode);
     });
+  }
+
+  // This method will add the book to the local storage
+  addToLocalStorage() {
+    localStorage.setItem('bookItems', JSON.stringify({ bookColl: this.books }));
   }
 }
 
