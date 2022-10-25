@@ -19,6 +19,25 @@ class SettingBooks {
   constructor(books = []) {
     this.books = books;
   }
+
+  // Add method to add a book to the books array
+  add(bookItem) {
+    this.books.push(bookItem);
+    this.show(bookItem);
+    this.remove();
+    this.saveToStorage();
+    inputAuthor.value = '';
+    inputTitle.value = '';
+  }
+
+  // Remove method to remove a book from the books array
+  remove() {
+    const removeBtns = document.querySelectorAll('.remove-button');
+    removeBtns[removeBtns.length - 1].addEventListener('click', (e) => {
+      this.removeFromColl(e.target);
+      bookSection.removeChild(e.target.parentNode);
+    });
+  }
 }
 
 // Adding a function to check if the local storage is available on the browser
