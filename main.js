@@ -13,6 +13,14 @@ class Book {
   }
 }
 
+// Adding another class that will hold the books array
+class SettingBooks {
+  // A constructor that will hold the books array
+  constructor(books = []) {
+    this.books = books;
+  }
+}
+
 // Adding a function to check if the local storage is available on the browser
 function storageAvailable(type) {
   let storage;
