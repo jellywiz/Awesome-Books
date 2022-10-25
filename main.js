@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 // Getting the elements from the html page
-const inputTitle = document.getElementById('title');
-const inputAuthor = document.getElementById('author');
+const inputTitle = document.querySelector('#title');
+const inputAuthor = document.querySelector('#author');
 const bookContainer = document.querySelector('.books-container');
 const btn = document.querySelector('#add-btn');
 
@@ -101,11 +101,6 @@ function storageAvailable(type) {
   }
 }
 
-function BooksLocalStorageObject(title, author) {
-  this.title = title;
-  this.author = author;
-}
-
 function populateLocalStorage() {
   let title = '';
   let author = '';
@@ -121,7 +116,7 @@ function populateLocalStorage() {
   }
 
   // Creating a new object that will hold the information we get from the input values
-  const booksLocalStorageObj = new BooksLocalStorageObject(title, author);
+  const booksLocalStorageObj = new Book(title, author);
 
   // Conditional statement to check id localStorage is available on the browser
   if (storageAvailable('localStorage')) {
@@ -132,7 +127,7 @@ function populateLocalStorage() {
 
 function loadLocalstorageData() {
   // Creating a new istance of booksLocalStorageObject with empty values
-  let booksLocalStorageObj = new BooksLocalStorageObject('', '');
+  let booksLocalStorageObj = new Book('', '');
 
   // Conditional statement to check id localStorage is available on the browser
   if (storageAvailable('localStorage')) {
