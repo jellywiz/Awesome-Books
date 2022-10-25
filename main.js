@@ -65,6 +65,14 @@ class SettingBooks {
   }
 }
 
+const call = new SettingBooks();
+if (localStorage.getItem('bookItems')) {
+  const localBooks = JSON.parse(localStorage.getItem('bookItems'));
+  localBooks.bookColl.forEach((item) => {
+    call.add(new Book(item.title, item.author));
+  });
+}
+
 // Adding a function to check if the local storage is available on the browser
 function storageAvailable(type) {
   let storage;
