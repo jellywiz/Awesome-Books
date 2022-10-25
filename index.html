@@ -10,11 +10,12 @@
 <body>
     <section>
         <h1 class="header">Awesome Books</h1>
-        <ul></ul>
-        <form action="">
-           <input id="title" type="text" placeholder="Title"> <br>
-           <input id="author" type="text" placeholder="Author"> <br>
-           <button id="add-btn" type="submit">Add</button>
+        <div class="books-container"></div> <br> <hr>
+        <h1>Add a new book</h1>
+        <form>
+           <input id="title" type="text" placeholder="Title" required> <br> <br>
+           <input id="author" name="author" type="text" placeholder="Author" required> <br> <br>
+           <button id="add-btn" type="button">Add the book</button>
         </form>
     </section>
     <script src="main.js"></script>
