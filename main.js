@@ -39,6 +39,26 @@ class SettingBooks {
     });
   }
 
+  // This method will create new content in the html page
+  show(item) {
+    if (this) {
+      const div = document.createElement('div');
+      div.className = 'books';
+      div.innerHTML = `<h3 class="books-items">"${item.title}" by
+                    ${item.author}</h3>
+                    <button data-value="${item.title}-${item.author}" type="button" class ="remove-button">Remove</button>`;
+      bookContainer.appendChild(div);
+    }
+  }
+
+  removeFromCollection(item) {
+    const arr = item.getAttribute('data-value').split('-');
+    this.books = this.books.filter(
+      (data) => data.title !== arr[0] && data.author !== arr[1],
+    );
+    this.addToLocalStorage();
+  }
+
   // This method will add the book to the local storage
   addToLocalStorage() {
     localStorage.setItem('bookItems', JSON.stringify({ bookColl: this.books }));
