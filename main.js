@@ -73,6 +73,9 @@ if (localStorage.getItem('bookItems')) {
   });
 }
 
+btn.addEventListener('click', () => {
+  call.add(new Book(inputTitle.value, inputAuthor.value));
+});
 // Adding a function to check if the local storage is available on the browser
 function storageAvailable(type) {
   let storage;
