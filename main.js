@@ -64,6 +64,68 @@ function displayBook() {
   });
 }
 
+// Adding an event listener to the form to submit the data and display the book in the list
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  addToLocalStorage(book);
+  displayBook();
+  inputTitle.value = '';
+  inputAuthor.value = '';
+});
+
+// creating a function to load the books from the local storage to the list when the page loads
+function getBook() {
+  const dataFromLocalStorage = JSON.parse(localStorage.getItem('books'));
+  const list = document.querySelector('ul');
+
+  // Looping through the data from the local storage and displaying it in the list
+  if (localStorage) {
+    // eslint-disable-next-line no-restricted-syntax
+    dataFromLocalStorage.forEach((books) => {
+      book.push(books);
+
+      const li = document.createElement('li');
+
+      li.innerHTML = `
+      <span>${books.title}</span><br>
+      <span>${books.author}</span><br>
+      <button id="remove-btn class="remove">Remove</button>
+      <hr>
+      `;
+      list.appendChild(li);
+    });
+  }
+}
+
+getBook();
+
+const removeBtn = document.querySelectorAll('.remove');
+
+// Adding event Listener to the remove button to remove the book from the list and the local storage
+removeBtn.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    function removeBook(element) {
+      const key = element;
+      localStorage.removeItem(key);
+      for (let i = 0; i < book.length; i += 1) {
+        if (element === book[i].title) {
+          book.splice(i, 1);
+        }
+      }
+    }
+
+    // Calling the removeBook function to remove the book from the list and the local storage
+    removeBook(e.target.parentElement.firstElementChild.innerText);
+    // Removing the book from the list
+    e.target.parentElement.remove();
+    // Clearing the local storage
+    localStorage.clear();
+    // Adding the new book to the local storage
+    addToLocalStorage(book);
+  });
+});
+
 // Adding a function to check if the local storage is available on the browser
 function storageAvailable(type) {
   let storage;
