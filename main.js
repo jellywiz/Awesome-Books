@@ -6,10 +6,10 @@ const bookContainer = document.querySelector('.books-container');
 const btn = document.querySelector('#add-btn');
 const listLink = document.querySelector('#list-link');
 const addLink = document.querySelector('#add-link');
-const contactLink = document.querySelector('#contact-link')
-const booksSection = document.querySelector('.books-section')
-const addBookSection = document.querySelector('.add-book-section')
-const contactSection = document.querySelector('.contact-section')
+const contactLink = document.querySelector('#contact-link');
+const booksSection = document.querySelector('.books-section');
+const addBookSection = document.querySelector('.add-book-section');
+const contactSection = document.querySelector('.contact-section');
 let booksCounter = 0;
 // Addinding a book class with a constructor that will hold the title and the author
 class Book {
@@ -19,23 +19,23 @@ class Book {
   }
 }
 
-addLink.addEventListener('click', function (){
-    booksSection.classList.add('active');
-    addBookSection.classList.add('active')
-    contactSection.classList.remove('active')
-})
+addLink.addEventListener('click', () => {
+  booksSection.classList.add('active');
+  addBookSection.classList.add('active');
+  contactSection.classList.remove('active');
+});
 
-contactLink.addEventListener('click', function() {
-    booksSection.classList.add('active');
-    contactSection.classList.add('active');
-    addBookSection.classList.remove('active');
-})
+contactLink.addEventListener('click', () => {
+  booksSection.classList.add('active');
+  contactSection.classList.add('active');
+  addBookSection.classList.remove('active');
+});
 
-listLink.addEventListener('click', function() {
-    booksSection.classList.remove('active');
-    contactSection.classList.remove('active')
-    addBookSection.classList.remove('active')
-})
+listLink.addEventListener('click', () => {
+  booksSection.classList.remove('active');
+  contactSection.classList.remove('active');
+  addBookSection.classList.remove('active');
+});
 
 // Adding another class that will hold the books array
 class SettingBooks {
