@@ -193,6 +193,21 @@ footer p {
   transition: scale 0.5s, color 0.5s, font-weight 0.5s, background-color 0.5s;
 }
 
+.contact-section li {
+  list-style: circle;
+}
+
+.contact-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 5px;
+  margin: 5em auto 0;
+  padding: 10px;
+  color: #256d85;
+  font-weight: 550;
+}
+
 .add-book-section {
   display: none;
 }
@@ -206,5 +221,5 @@ footer p {
 }
 
 .contact-section.active {
-  display: flex;
+  display: block;
 }
