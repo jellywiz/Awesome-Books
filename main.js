@@ -4,7 +4,13 @@ const inputTitle = document.querySelector('#title');
 const inputAuthor = document.querySelector('#author');
 const bookContainer = document.querySelector('.books-container');
 const btn = document.querySelector('#add-btn');
-let booksCounter = 0;
+const listLink = document.querySelector('#list-link');
+const addLink = document.querySelector('#add-link');
+const contactLink = document.querySelector('#contact-link');
+const booksSection = document.querySelector('.books-section');
+const addBookSection = document.querySelector('.add-book-section');
+const contactSection = document.querySelector('.contact-section');
+
 // Addinding a book class with a constructor that will hold the title and the author
 class Book {
   constructor(title, author) {
@@ -12,6 +18,24 @@ class Book {
     this.author = author;
   }
 }
+
+addLink.addEventListener('click', () => {
+  booksSection.classList.add('active');
+  addBookSection.classList.add('active');
+  contactSection.classList.remove('active');
+});
+
+contactLink.addEventListener('click', () => {
+  booksSection.classList.add('active');
+  contactSection.classList.add('active');
+  addBookSection.classList.remove('active');
+});
+
+listLink.addEventListener('click', () => {
+  booksSection.classList.remove('active');
+  contactSection.classList.remove('active');
+  addBookSection.classList.remove('active');
+});
 
 // Adding another class that will hold the books array
 class SettingBooks {
@@ -41,23 +65,13 @@ class SettingBooks {
 
   // This method will create new content in the html page
   show(item) {
-    booksCounter += 1;
     if (this) {
-      if (booksCounter % 2 !== 0) {
-        const div = document.createElement('div');
-        div.className = 'books books-items-odd';
-        div.innerHTML = `<h3 class="books-items">"${item.title}" by
-                    ${item.author}</h3>
-                    <button data-value="${item.title}-${item.author}" type="button" class ="remove-button">Remove</button>`;
-        bookContainer.appendChild(div);
-      } else {
-        const div = document.createElement('div');
-        div.className = 'books';
-        div.innerHTML = `<h3 class="books-items">"${item.title}" by
-                    ${item.author}</h3>
-                    <button data-value="${item.title}-${item.author}" type="button" class ="remove-button">Remove</button>`;
-        bookContainer.appendChild(div);
-      }
+      const div = document.createElement('div');
+      div.className = 'books books-items';
+      div.innerHTML = `<h3 class="books-items">"${item.title}" by
+                  ${item.author}</h3>
+                  <button data-value="${item.title}-${item.author}" type="button" class ="remove-button">Remove</button>`;
+      bookContainer.appendChild(div);
     }
   }
 

@@ -11,11 +11,32 @@
 
 <body>
     <div class="wrapper">
-        <section class="books-section">
+        <header class="page-header">
+            <nav class="nav-bar">
+                <p>
+                    <a href="#">Awesome Books</a>
+                </p>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="list-link">List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="add-link">Add New</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="contact-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section class="books-section page-sections">
             <h1 class="header">Awesome Books</h1>
             <div class="books-container"></div>
+        </section>
+        <section class="add-book-section page-sections">
+            <h2 class="header">Add a new book</h2> <hr>
             <form class="books-form">
-                <h2 class="form-title">Add a new book</h2>
+
                 <input class="form-input" id="title" type="text" placeholder="Title" required>
                 <input class="form-input" id="author" name="author" type="text" placeholder="Author" required>
                 <div class="add-btn-div">
@@ -23,6 +44,29 @@
                 </div>
             </form>
         </section>
+        <section class="contact-section page-sections">
+            <h2 class="header"> Contact Information</h2> <hr>
+            <div class="contact-section-wrapper">
+                <p>
+                    Do you have any questions or whant to say "Hello"?
+                    <span>You can reach out to us!</span>
+                </p>
+                <ul>
+                    <li>
+                        Our email:mail@mail.com
+                    </li>
+                    <li>
+                        Our phone number: 87325853836
+                    </li>
+                    <li>
+                        Our adresss: First street apartement four
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <footer>
+            <p>Copyright</p>
+        </footer>
     </div>
     <script src="main.js"></script>
 </body>
