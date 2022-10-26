@@ -4,6 +4,11 @@ const inputTitle = document.querySelector('#title');
 const inputAuthor = document.querySelector('#author');
 const bookContainer = document.querySelector('.books-container');
 const btn = document.querySelector('#add-btn');
+const listLink = document.querySelector('#list-link');
+const addLink = document.querySelector('#add-link');
+const contactLink = document.querySelector('#contact-link')
+const booksSection = document.querySelector('.books-section')
+const addBookSection = document.querySelector('.add-book-section')
 let booksCounter = 0;
 // Addinding a book class with a constructor that will hold the title and the author
 class Book {
@@ -12,6 +17,7 @@ class Book {
     this.author = author;
   }
 }
+
 
 // Adding another class that will hold the books array
 class SettingBooks {
